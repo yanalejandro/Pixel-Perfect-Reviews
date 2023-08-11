@@ -54,6 +54,7 @@ Review.init(
         game_id: {
             type: DataTypes.INTEGER,
             // we can't add this yet, since we don't have our games
+            // and we would need to add the ids to our existing data first too
             // allowNull: false,
             // references: {
             //     model: 'games',
