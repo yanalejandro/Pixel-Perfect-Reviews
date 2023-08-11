@@ -3,22 +3,21 @@ const Review = require('./Review');
 const Game = require('./Game');
 
 
-
 // Each user can have many reviews:
 User.hasMany(Review, {
-    foreignKey: 'user-id'
+    foreignKey: 'user_id'
 });
 Review.belongsTo(User, {
-    foreignKey: 'user-id'
+    foreignKey: 'user_id'
 });
 
 
 // Each Game can have many reviews:
     Game.hasMany(Review, {
-        foreignKey: 'game-id'
+        foreignKey: 'game_id'
     });
     Review.belongsTo(Game, {
-        foreignKey: 'game-id'
+        foreignKey: 'game_id'
     });
 
 
