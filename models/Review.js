@@ -25,33 +25,49 @@ Review.init(
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        hours_played: {
+        hour_played: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        password: {
+        recommendation: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        review: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+        },
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
-            // password must be at least 8 char long
-            validate: {
-                len: [8]
-            },
+        },
+        // references User
+        user_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id'
+            }
+        },
+        // references game
+        game_id: {
+            type: DataTypes.INTEGER,
+            // we can't add this yet, since we don't have our games
+            // allowNull: false,
+            // references: {
+            //     model: 'games',
+            //     key: 'id'
+            // }
         }
     },
     {
-        hooks: {
-            // password is hashed before it is sent in to table
-            async beforeCreate(newUserData) {
-                newUserData.password = await bcrypt.hash(newUserData.password, 10);
-                return newUserData;
-            },
-        },
         sequelize,
         timestamps: false,
         freezeTableName: false,
         underscored: true,
-        modelName: 'user',
+        modelName: 'review',
     }
 );
 
-module.exports = User;
+module.exports = Review;
