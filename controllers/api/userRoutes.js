@@ -1,6 +1,28 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// create new user
+router.post('/', async (req, res) => {
+    try {
+        // create new User with given username and password
+        const userData = await User.create({
+            username: req.body.username,
+            password: req.body.password
+        });
+    
+        // create a new session with created user, using their unique id
+        req.session.save(() => {
+            req.session.loggedIn = true;
+            req.session.user = userData.id;
+            res.status(200).json(userData);
+        });
+    } 
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 // call to check password from login.js
 router.post('/login', async (req, res) => {
     try {
@@ -33,5 +55,18 @@ router.post('/login', async (req, res) => {
     } 
     catch (err) {
         res.status(400).json(err);
+    }
+});
+
+// log out user
+router.post('/logout', (req, res) => {
+    // end currently logged in session by destroying it
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } 
+    else {
+        res.status(404).end();
     }
 });
