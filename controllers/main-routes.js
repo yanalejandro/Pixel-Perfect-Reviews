@@ -6,6 +6,7 @@ const Authenticate = require('../utils/authenticate');
 // if we want to only put the most reviewed games, we may need to edit this to only
 // grab those games
 // for now it sends all games
+// NOTE: we currently have no games, so this wont do anything yet
 router.get('/', async (req, res) => {
     try {
         const gameData = await Game.findAll();
