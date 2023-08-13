@@ -52,6 +52,39 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// user profile page
+// access user profile when they are logged in
+router.get('/profile', Authenticate, async (req, res) => {
+    // show only posts and comments from user
+    try {
+        const reviewData = await Review.findAll(
+            {
+                // only get reviews for current user
+                where: { user_id: req.session.user_id } 
+            },
+            {
+            include: [
+                {
+                    model: User,
+                    attributes: { exclude: ['password']}
+                }
+            ]
+        });
+        // get each post from the data
+        const reviews = reviewData.map((review) =>
+            review.get({ plain: true })
+        );
+        res.render('profile', {
+            reviews,
+            loggedIn: req.session.loggedIn,
+        });
+    } 
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 // get selected game by given id
 // NOTE: we currently have no games, so this wont do anything yet
 router.get('games/:id', async (req, res) => {
@@ -92,7 +125,10 @@ router.get('games/:id', async (req, res) => {
 
     // the game is sent to show the handlebars file we have for showing a specific game
     // if we want to show it in a different handlebars file, we'll just change the name in the ''
-    res.render('game', game);
+    res.render('game', {
+        game,
+        loggedIn: req.session.loggedIn
+    });
     }
     catch (err) {
         res.status(500).json(err);
@@ -139,6 +175,11 @@ router.get('reviews/:id', async (req, res) => {
     catch (err) {
         res.status(500).json(err);
     }
+});
+
+// take user to create a new review page, but only if they are logged in
+router.get('/newreview', Authenticate, (req, res) => {
+    res.render('newreview');
 });
 
 module.exports = router;
