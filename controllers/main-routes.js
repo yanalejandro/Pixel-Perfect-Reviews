@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { User, Game, Review } = require('../models');
-// const Authenticate = require('../utils/authenticate');
+const Authenticate = require('../utils/authenticate');
 
 // sends game data to dashboard
 // if we want to only put the most reviewed games, we may need to edit this to only
@@ -54,6 +54,7 @@ router.get('/signup', (req, res) => {
 
 // user profile page
 // access user profile when they are logged in
+// Authenticate is function that sends them to login page if not logged in
 router.get('/profile', Authenticate, async (req, res) => {
     // show only posts and comments from user
     try {
@@ -178,6 +179,7 @@ router.get('reviews/:id', async (req, res) => {
 });
 
 // take user to create a new review page, but only if they are logged in
+// Authenticate is function that sends them to login page if not logged in
 router.get('/newreview', Authenticate, (req, res) => {
     res.render('newreview');
 });
