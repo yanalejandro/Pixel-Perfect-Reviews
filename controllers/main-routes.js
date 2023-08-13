@@ -52,6 +52,38 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// get selected review by given id
+router.get('reviews/:id', async (req, res) => {
+    try {
+    // search database for a review with an id (pk) that matches
+    // and include the name of the user that created it
+    const reviewData = await Review.findByPk(req.params.id, {
+        include: [
+            {
+                model: User,
+                attributes: [
+                    'username'
+                ],
+            }
+        ]
+    });
 
+    // to test that data was grabbed, it should log the data we want
+    console.log(reviewData);
+
+    // '.get({ plain: true })' so that it only has the data we want
+    const review = reviewData.get({ plain: true });
+
+    // the review is sent to show the handlebars file we have for showing a specific review
+    // if we want to show it in a different handlebars file, we'll just change the name in the ''
+    res.render('review', { 
+        review,
+        loggedIn: req.session.loggedIn
+    });
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;
