@@ -25,7 +25,4 @@ router.post('/', async (req, res) => {
     }
 });
 
-
-// add get reviews for selected game (add once we have game_ids added to review data)
-
 module.exports = router;

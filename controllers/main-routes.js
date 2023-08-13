@@ -52,11 +52,59 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+// get selected game by given id
+// NOTE: we currently have no games, so this wont do anything yet
+router.get('games/:id', async (req, res) => {
+    try {
+    // search database for a game with an id (pk) that matches
+    // get the reviews for the game and the users that made them
+    const gameData = await Game.findByPk(req.params.id, {
+        include: [
+            {
+                model: Review,
+                attributes: [
+                    'date_posted',
+                    'funny',
+                    'helpful',
+                    'hour_played',
+                    'recommendation',
+                    'review',
+                    'user_id'
+                ],
+                // get user for review
+                include: [
+                    {
+                        model: User,
+                        attributes: [
+                            'username'
+                        ]
+                    }
+                ]
+            }
+        ]
+    });
+
+    // to test that data was grabbed, it should log the data we want
+    console.log(gameData);
+
+    // '.get({ plain: true })' so that it only has the data we want
+    const game = gameData.get({ plain: true });
+
+    // the game is sent to show the handlebars file we have for showing a specific game
+    // if we want to show it in a different handlebars file, we'll just change the name in the ''
+    res.render('game', game);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 // get selected review by given id
 router.get('reviews/:id', async (req, res) => {
     try {
     // search database for a review with an id (pk) that matches
-    // and include the name of the user that created it
+    // include the name of the user that created it
+    // and the game it is about
     const reviewData = await Review.findByPk(req.params.id, {
         include: [
             {
@@ -64,6 +112,13 @@ router.get('reviews/:id', async (req, res) => {
                 attributes: [
                     'username'
                 ],
+            },
+            {
+                model: Game,
+                attributes: [
+                    'title',
+                    'image_file'
+                ]
             }
         ]
     });
