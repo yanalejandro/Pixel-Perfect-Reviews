@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Game, Review } = require('../models');
+const { User, Game, Review, Comment } = require('../models');
 const Authenticate = require('../utils/authenticate');
 
 // sends game data to dashboard
@@ -135,7 +135,7 @@ route.get('/profile/my_reviews', Authenticate, async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-});
+})
 
 // get selected game by given id
 // NOTE: we currently have no games, so this wont do anything yet
@@ -206,6 +206,22 @@ router.get('reviews/:id', async (req, res) => {
                 attributes: [
                     'title',
                     'image_file'
+                ]
+            },
+            {
+                model: Comment,
+                attributes: [
+                    'comment_text',
+                    'user_id'
+                ],
+                // get user for comment
+                include: [
+                    {
+                        model: User,
+                        attributes: [
+                            'username'
+                        ]
+                    }
                 ]
             }
         ]
