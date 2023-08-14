@@ -12,6 +12,11 @@ async function deleteFormHandler (event) {
       'Content-Type': 'application/json'
     }
   });
+  if (response.ok) {
+    document.location.replace('/dashboard');
+  } else {
+    alert(response.statusText);
+  }
 }
 
 document.querySelector('.delete-review-btn').addEventListener('click', deleteFormHandler);
