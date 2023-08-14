@@ -112,7 +112,37 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
     }
 });
 
-
+// get user's reviews
+route.get('/profile/my_reviews', Authenticate, async (req, res) => {
+    try {
+        const reviewData = await Review.findAll(
+            {
+                // only get reviews for current user
+                where: { user_id: req.session.user_id } 
+            },
+            {
+            include: [
+                {
+                    model: User,
+                    attributes: { exclude: ['password']}
+                }
+            ]
+        });
+        // get each post from the data
+        const reviews = reviewData.map((review) =>
+            review.get({ plain: true })
+        );
+        
+        res.render('my_reviews', {
+            reviews,
+            loggedIn: req.session.loggedIn,
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 // get selected game by given id
 // NOTE: we currently have no games, so this wont do anything yet
