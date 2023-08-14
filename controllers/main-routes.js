@@ -87,6 +87,33 @@ router.get('/profile', Authenticate, async (req, res) => {
     }
 });
 
+// Get user wish list data
+router.get('/profile/wish_list', Authenticate, async (req, res) => {
+    try {
+        // get fav games for user
+        const userGameData = await User.findByPk(req.session.user_id, {
+            include: [
+                {
+                    model: Game,
+                    as: "favorite_games"
+                }
+            ]
+        });
+        userGames = userGameData.get({ plain: true });
+
+        res.render('wish_list', {
+            userGames,
+            loggedIn: req.session.loggedIn,
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+
+
 // get selected game by given id
 // NOTE: we currently have no games, so this wont do anything yet
 router.get('games/:id', async (req, res) => {
