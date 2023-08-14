@@ -4,10 +4,11 @@ const { User } = require('../../models');
 // create new user
 router.post('/', async (req, res) => {
     try {
-        // create new User with given username and password
+        // create new User with given username and password and email
         const userData = await User.create({
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            email: req.body.email
         });
     
         // create a new session with created user, using their unique id
@@ -26,12 +27,12 @@ router.post('/', async (req, res) => {
 // call to check password from login.js
 router.post('/login', async (req, res) => {
     try {
-        // Grab user that matches the entered username
-        const userData = await User.findOne({ where: { username: req.body.username } });
+        // Grab user that matches the entered email
+        const userData = await User.findOne({ where: { email: req.body.email } });
 
-        // if user data is not found for given username
+        // if user data is not found for given email
         if (!userData) {
-            res.status(400).json({ message: 'Please enter a valid username' });
+            res.status(400).json({ message: 'Please enter a valid email' });
             return;
         }
 
