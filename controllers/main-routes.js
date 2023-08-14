@@ -59,6 +59,55 @@ router.get('/signup', (req, res) => {
 router.get('/profile', Authenticate, async (req, res) => {
     // show only posts and comments from user
     try {
+        const userReviewData = await User.findByPk(req.session.user_id, {
+            include: [
+                {
+                    model: Review,
+                    as: "favorite_reviews"
+                }
+            ]
+        });
+        userReviews = userReviewData.get({ plain: true });
+        
+        res.render('profile', {
+            userReviews,
+            loggedIn: req.session.loggedIn,
+        });
+    } 
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// Get user wish list data
+router.get('/profile/wish_list', Authenticate, async (req, res) => {
+    try {
+        // get fav games for user
+        const userGameData = await User.findByPk(req.session.user_id, {
+            include: [
+                {
+                    model: Game,
+                    as: "favorite_games"
+                }
+            ]
+        });
+        userGames = userGameData.get({ plain: true });
+
+        res.render('wish_list', {
+            userGames,
+            loggedIn: req.session.loggedIn,
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// get user's reviews
+route.get('/profile/my_reviews', Authenticate, async (req, res) => {
+    try {
         const reviewData = await Review.findAll(
             {
                 // only get reviews for current user
@@ -76,11 +125,12 @@ router.get('/profile', Authenticate, async (req, res) => {
         const reviews = reviewData.map((review) =>
             review.get({ plain: true })
         );
-        res.render('profile', {
+
+        res.render('my_reviews', {
             reviews,
             loggedIn: req.session.loggedIn,
         });
-    } 
+    }
     catch (err) {
         console.log(err);
         res.status(500).json(err);
