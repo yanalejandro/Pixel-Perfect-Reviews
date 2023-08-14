@@ -59,25 +59,18 @@ router.get('/signup', (req, res) => {
 router.get('/profile', Authenticate, async (req, res) => {
     // show only posts and comments from user
     try {
-        const reviewData = await Review.findAll(
-            {
-                // only get reviews for current user
-                where: { user_id: req.session.user_id } 
-            },
-            {
+        const userReviewData = await User.findByPk(req.session.user_id, {
             include: [
                 {
-                    model: User,
-                    attributes: { exclude: ['password']}
+                    model: Review,
+                    as: "favorite_reviews"
                 }
             ]
         });
-        // get each post from the data
-        const reviews = reviewData.map((review) =>
-            review.get({ plain: true })
-        );
+        userReviews = userReviewData.get({ plain: true });
+        
         res.render('profile', {
-            reviews,
+            userReviews,
             loggedIn: req.session.loggedIn,
         });
     } 
@@ -132,7 +125,7 @@ route.get('/profile/my_reviews', Authenticate, async (req, res) => {
         const reviews = reviewData.map((review) =>
             review.get({ plain: true })
         );
-        
+
         res.render('my_reviews', {
             reviews,
             loggedIn: req.session.loggedIn,
