@@ -25,4 +25,25 @@ router.post('/', async (req, res) => {
     }
 });
 
+// delete a review
+router.delete('/:id', async (req, res) => {
+    try {
+        // delete review where the id matches
+        const reviewData = await Review.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        // if there is no review of that id give an error
+        if (!reviewData) {
+            res.status(404).json({ message: 'No review with this id!' });
+            return;
+        }
+        res.status(200).json(reviewData);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+})
+
 module.exports = router;
