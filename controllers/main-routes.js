@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Game, Review } = require('../models');
+const { User, Game, Review, Comment } = require('../models');
 const Authenticate = require('../utils/authenticate');
 
 // sends game data to dashboard
@@ -206,6 +206,22 @@ router.get('reviews/:id', async (req, res) => {
                 attributes: [
                     'title',
                     'image_file'
+                ]
+            },
+            {
+                model: Comment,
+                attributes: [
+                    'comment_text',
+                    'user_id'
+                ],
+                // get user for comment
+                include: [
+                    {
+                        model: User,
+                        attributes: [
+                            'username'
+                        ]
+                    }
                 ]
             }
         ]

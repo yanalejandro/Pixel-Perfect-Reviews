@@ -51,4 +51,4 @@ User.belongsToMany(Game, { through: 'User_Games' });
 Game.belongsToMany(User, { through: 'User_Games' });
 
 
-module.exports = { User, Review, Game};
+module.exports = { User, Review, Game, Comment};
