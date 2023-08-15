@@ -8,9 +8,11 @@ router.post('/', async (req, res) => {
     try {
         // create new review with given review info
         const gameData = await Game.create({
+            id: req.body.id,
             title: req.body.title,
             image_file: req.session.image_file,
-            price: req.body.price
+            summary: req.body.summary,
+            rating: req.body.summary
         });
     
         res.status(200).json(gameData);

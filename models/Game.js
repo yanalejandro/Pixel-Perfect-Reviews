@@ -10,7 +10,7 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            autoIncrement: false,
         },
         title: {
             type: DataTypes.STRING,
@@ -21,8 +21,11 @@ Game.init(
         image_file: {
             type: DataTypes.STRING
         },
-        price: {
-            type: DataTypes.INTEGER
+        summary: {
+            type: DataTypes.TEXT
+        },
+        rating: {
+            type: DataTypes.DECIMAL
         }
     },
     {
