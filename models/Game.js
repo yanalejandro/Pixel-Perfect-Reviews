@@ -21,11 +21,11 @@ Game.init(
         image_file: {
             type: DataTypes.STRING
         },
-        price: {
-            type: DataTypes.INTEGER
-        },
         summary: {
             type: DataTypes.TEXT
+        },
+        rating: {
+            type: DataTypes.DECIMAL
         }
     },
     {
