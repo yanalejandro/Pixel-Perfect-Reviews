@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const { Review } = require('../../models');
-const Authenticate = require('../../utils/authenticate');
 
 // add new review when given review info
-router.post('/', Authenticate, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         // create new review with given review info
         const reviewData = await Review.create({
