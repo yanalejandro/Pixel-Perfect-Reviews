@@ -10,7 +10,7 @@ Game.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true,
+            autoIncrement: false,
         },
         title: {
             type: DataTypes.STRING,
