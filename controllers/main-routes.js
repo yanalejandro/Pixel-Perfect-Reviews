@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Game, Review, Comment } = require('../models');
 const Authenticate = require('../utils/authenticate');
-const sequelize = require('../../config/connection');
+const sequelize = require('../config/connection');
 
 // sends game data to dashboard
 // if we want to only put the most reviewed games, we may need to edit this to only
@@ -13,6 +13,9 @@ router.get('/', async (req, res) => {
 
         // clean up data
         const games = gameData.map((game) => game.get({plain: true}));
+
+        // test
+        console.log(games);
 
         // sends all games and if user is logged in or not to dashboard
         // the loggedIn is just so we can either have login or logout showing depending
@@ -94,6 +97,9 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
         });
         userGames = userGameData.get({ plain: true });
 
+        // test
+        console.log(userGames);
+
         res.render('wish_list', {
             userGames,
             loggedIn: req.session.loggedIn,
@@ -106,7 +112,7 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
 });
 
 // get user's reviews
-route.get('/profile/my_reviews', Authenticate, async (req, res) => {
+router.get('/profile/my_reviews', Authenticate, async (req, res) => {
     try {
         const reviewData = await Review.findAll(
             {
@@ -126,6 +132,9 @@ route.get('/profile/my_reviews', Authenticate, async (req, res) => {
             review.get({ plain: true })
         );
 
+        // test
+        console.log(reviews);
+
         res.render('my_reviews', {
             reviews,
             loggedIn: req.session.loggedIn,
@@ -138,12 +147,12 @@ route.get('/profile/my_reviews', Authenticate, async (req, res) => {
 });
 
 // search for game in db by title
-router.get('games/search/:search', async (req, res) => {
+router.get('/games/search/:term', async (req, res) => {
     try {
-        const search = req.params.search.toLowerCase();
+        const search = req.params.term.toLowerCase();
 
         // should get all games that contain the search term in their title
-        const searchData = await sequelize.literal(`(SELECT * FROM games where lower(title) LIKE '%${search}%')`);
+        const searchData = await sequelize.query(`(SELECT * FROM game_db.games where lower(title) LIKE '%${search}%')`);
 
         // if the above gives us problems, we'll try the below...
         // const searchData = await Game.findAll(
@@ -154,11 +163,16 @@ router.get('games/search/:search', async (req, res) => {
         //     }
         // ); 
 
-        const games = searchData.map((game) => 
-            game.get({ plain: true })
-        );
+        // shows results
+        console.log(searchData);
+
+        const games = searchData.get({ plain: true });
+
+        // test: does not show results?
+        console.log(games);
 
         // send games to search results handlebar
+        // may need to change games to searchData and get data from there if games does not work
         res.render('searchresults', {
             games,
             loggedIn: req.session.loggedIn,
@@ -171,7 +185,7 @@ router.get('games/search/:search', async (req, res) => {
 
 // search games api for games and show results
 // this is so user can select new game to review (if not already in db)
-router.get('newgames/search/:search', async (req, res) => {
+router.get('/newgames/search/:search', async (req, res) => {
     try {
         const search = req.params.search.toLowerCase();
 
@@ -190,6 +204,9 @@ router.get('newgames/search/:search', async (req, res) => {
         if (newResponse.ok) {
             const searchResults = await newResponse.json();
 
+            // test
+            console.log(searchResults);
+
             res.render('newgames', {
                 searchResults,
                 loggedIn: req.session.loggedIn,
@@ -203,7 +220,7 @@ router.get('newgames/search/:search', async (req, res) => {
 
 // get selected game by given id
 // NOTE: we currently have no games, so this wont do anything yet
-router.get('games/:id', async (req, res) => {
+router.get('/games/:id', async (req, res) => {
     try {
     // search database for a game with an id (pk) that matches
     // get the reviews for the game and the users that made them
@@ -233,11 +250,15 @@ router.get('games/:id', async (req, res) => {
         ]
     });
 
-    // to test that data was grabbed, it should log the data we want
-    console.log(gameData);
-
     // '.get({ plain: true })' so that it only has the data we want
     const game = gameData.get({ plain: true });
+
+    // test: its a very long list, so I commented it out
+    // console.log(game);
+    // how to access one review
+    console.log(game.reviews[0]);
+    // how to access the review's creator
+    console.log(game.reviews[0].user.username);
 
     // the game is sent to show the handlebars file we have for showing a specific game
     // if we want to show it in a different handlebars file, we'll just change the name in the ''
@@ -252,7 +273,7 @@ router.get('games/:id', async (req, res) => {
 });
 
 // get selected review by given id
-router.get('reviews/:id', async (req, res) => {
+router.get('/reviews/:id', async (req, res) => {
     try {
     // search database for a review with an id (pk) that matches
     // include the name of the user that created it
@@ -293,11 +314,11 @@ router.get('reviews/:id', async (req, res) => {
         ]
     });
 
-    // to test that data was grabbed, it should log the data we want
-    console.log(reviewData);
-
     // '.get({ plain: true })' so that it only has the data we want
     const review = reviewData.get({ plain: true });
+
+    // test
+    console.log(review);
 
     // the review is sent to show the handlebars file we have for showing a specific review
     // if we want to show it in a different handlebars file, we'll just change the name in the ''
