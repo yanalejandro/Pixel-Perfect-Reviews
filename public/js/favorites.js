@@ -1,6 +1,6 @@
 // Assume you have a button with the class "favorite-button"
 const favoriteButton = document.querySelector('.favorite-button');
-const itemId =  ""; // Replace with the actual item ID
+const reviewId =  ""; // Replace with the actual item ID
 
 favoriteButton.addEventListener('click', () => {
   // Make a request to the backend API to save the favorite
@@ -9,7 +9,7 @@ favoriteButton.addEventListener('click', () => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ itemId }),
+    body: JSON.stringify({ reviewId }),
   })
     .then(response => response.json())
     .then(data => {
