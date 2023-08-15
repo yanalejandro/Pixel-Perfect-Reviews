@@ -4,7 +4,7 @@
   "description": "Website for Video Game Reviews",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js"
   },
   "keywords": [],
@@ -21,6 +21,8 @@
     "express-session": "^1.17.1",
     "handlebars": "^4.7.8",
     "intro.js": "^7.1.0",
+    "jest": "^29.6.2",
+    "jsdom": "^22.1.0",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.9.4",
     "sequelize": "^6.32.1"
