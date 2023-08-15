@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Game, Review, Comment } = require('../models');
 const Authenticate = require('../utils/authenticate');
+const sequelize = require('../../config/connection');
 
 // sends game data to dashboard
 // if we want to only put the most reviewed games, we may need to edit this to only
@@ -133,6 +134,70 @@ route.get('/profile/my_reviews', Authenticate, async (req, res) => {
     }
     catch (err) {
         console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// search for game in db by title
+router.get('games/search/:search', async (req, res) => {
+    try {
+        const search = req.params.search.toLowerCase();
+
+        // should get all games that contain the search term in their title
+        const searchData = await sequelize.literal(`(SELECT * FROM games where lower(title) LIKE '%${search}%')`);
+
+        // if the above gives us problems, we'll try the below...
+        // const searchData = await Game.findAll(
+        //     {
+        //         where: { title: {
+        //             [Op.substring]: `${search}`
+        //         } }
+        //     }
+        // ); 
+
+        const games = searchData.map((game) => 
+            game.get({ plain: true })
+        );
+
+        // send games to search results handlebar
+        res.render('searchresults', {
+            games,
+            loggedIn: req.session.loggedIn,
+        });
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// search games api for games and show results
+// this is so user can select new game to review (if not already in db)
+router.get('newgames/search/:search', async (req, res) => {
+    try {
+        const search = req.params.search.toLowerCase();
+
+        // search game api for given value
+        const newResponse = await fetch(`https://api.igdb.com/v4/games`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Client-ID': 'pr4r1gm8l2x1xvmfz4tr9ag5qdkf8c',
+                'Authorization': 'Bearer tedb7dkatie4n0yz7renxmuvja7rm9',
+                'Content-Type': 'text/plain'
+            },
+            body: `search "${search}"; fields name, summary, cover, total_rating;`
+        });
+
+        if (newResponse.ok) {
+            const searchResults = await newResponse.json();
+
+            res.render('newgames', {
+                searchResults,
+                loggedIn: req.session.loggedIn,
+            });
+        }
+    }
+    catch (err) {
         res.status(500).json(err);
     }
 })
