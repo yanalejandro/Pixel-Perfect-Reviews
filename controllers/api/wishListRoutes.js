@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+
 // remove favorite game
 router.delete('/:id', async (req, res) => {
     try {
@@ -40,5 +41,6 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
 
 module.exports = router;
