@@ -21,4 +21,26 @@ router.post('/', async (req, res) => {
     }
 });
 
+
+// remove favorite game
+router.delete('/:id', async (req, res) => {
+    try {
+        // grab current user
+        const currentUser = await User.findByPk(req.session.user_id);
+
+        // grab selected game
+        const favGame = await Game.findByPk(req.params.id);
+
+        // remove from junction table
+        await currentUser.removeGame(favGame);
+
+        res.status(200).json(favGame);
+    } 
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+
 module.exports = router;
