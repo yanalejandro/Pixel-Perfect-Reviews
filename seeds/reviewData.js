@@ -11,7 +11,7 @@ const reviewdata = [
 		"review" : "&gt Played as German Reich&gt Declare war on Belgium&gt Can't break Belgium so go through France&gt Capitulate France in order to get to Belgium&gt Get True Blitzkrieg achievementThis game is dad",
 		"title" : "Expansion - Hearts of Iron IV: Man the Guns",
 		"user_id" : 1,
-		"game_id" : null
+		"game_id" : 115063
 	},
 	{
 		"id" : 2,
@@ -47,7 +47,7 @@ const reviewdata = [
 		"review" : "Out of all the reviews I wrote This one is probably the most serious one I wrote. For starters the community of this game sucks just like every online game You don't wanna talk to them because they're all just jerks who wanna say you suck or you camped or blah blah blah its rare to get a nice compliment out of people in this game.But you don't have to talk to the community either. Unlike most online games this one doesn't have a mic system so you don't have to worry about hearing a twelve year old cry baby raging at you for nothing. Only time you can talk to people in the game is in the beginning before the match starts if your a survivor and at the end after the match is over as both killer and survivor The end chat is the only one the killer can talk to everyone in the match though. Mostly just to say GG for Good Game.As Survivor you can basically just play every man for himself and be sneaky and say screw you to the other players or you can try to be a good team mate and rescue them if they get on a hook but if someone is a jerk in the chat before the match then you know who not to save if they get hooked. I mostly play killer because I find it more fun than playing survivor and someones gotta play killer and from what I hear most people enjoy playing survivor more. Probably becuase as survivor it feels like a horror game and you get team mates while as killer you're by yourself.But what i'm really trying to say is this game is really great even though the community sucks Just ignore the community and if you get someone who is raging at the end just say gg to them and leave. After seeing that they didn't make you argue with them and waste your time it might make them even more mad even if you got the last word aka GG. So I give this game a 8\/10. I wonder if anyone actually read this review I actually had to take my time to write this because I didn't wanna swear in it so you didn't see nothing but censor hearts that steam likes to do. So if you actually read this let me know by leaving a comment so I can be like someone read this peice of crap review yay!",
 		"title" : "Dead by Daylight",
 		"user_id" : 1,
-		"game_id" : null
+		"game_id" : 18866
 	},
 	{
 		"id" : 5,

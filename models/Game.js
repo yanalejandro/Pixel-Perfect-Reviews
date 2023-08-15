@@ -23,6 +23,9 @@ Game.init(
         },
         price: {
             type: DataTypes.INTEGER
+        },
+        summary: {
+            type: DataTypes.TEXT
         }
     },
     {
