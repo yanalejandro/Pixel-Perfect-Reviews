@@ -1,36 +1,50 @@
+const express = require('express');
+const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
+const exphbs = require('express-handlebars');
+
+const app = express();
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+// Handlebars setup
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
+
+// Create a transporter
 const transporter = nodemailer.createTransport({
-    host: 'localhost',
-    port: 1025,
-    auth: {
-      user: 'DB_USER',
-      pass: 'DB_PASSWORD'
-    }
+  service: 'gmail',
+  auth: {
+    user: 'your_email@gmail.com',
+    pass: 'your_email_password'
+  }
 });
 
-let message = {
-  from: '<example@nodemailer.com>',
-  to: '<example@nodemailer.com>',
-  subject: 'message',
-  text: 'input your message',
-  html: '<p>For clients that do not support AMP4EMAIL or amp content is not valid</p>',
-  amp: `<!doctype html>
-  <html ⚡4email>
-    <head>
-      <meta charset="utf-8">
-      <style amp4email-boilerplate>body{visibility:hidden}</style>
-      <script async src="https://cdn.ampproject.org/v0.js"></script>
-      <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
-    </head>
-    <body>
-      <p>Image: <amp-img src="https://cldup.com/P0b1bUmEet.png" width="16" height="16"/></p>
-      <p>GIF (requires "amp-anim" script in header):<br/>
-        <amp-anim src="https://cldup.com/D72zpdwI-i.gif" width="500" height="350"/></p>
-    </body>
-  </html>`
-}
+// Routes
+app.get('/', (req, res) => {
+  res.render('contact');
+});
 
-transporter.sendMail(message, (err, info) => {
-  console.log(err || info);
+app.post('/send-email', (req, res) => {
+  const formData = req.body;
+
+  const mailOptions = {
+    from: formData.email,
+    to: 'recipient@example.com',
+    subject: formData.subject,
+    text: `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Error:', error);
+      res.render('contact', { message: 'Error sending email.' });
+    } else {
+      console.log('Email sent:', info.response);
+      res.render('contact', { message: 'Email sent successfully.' });
+    }
+  });
 });
 
