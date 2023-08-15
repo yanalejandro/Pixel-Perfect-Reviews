@@ -175,7 +175,7 @@ const gameData = [
         // 92079 < look up img file
         image_file: '//images.igdb.com/igdb/image/upload/t_thumb/co1z1r.jpg',
         summary: `PUBG Season 4 unveils a stunning new visual update for Erangel and reaches back into the undiscovered history of the infamous island that captured the world’s attention with Battle Royale. Erangel, which has a special home in the hearts of many of us, now features refreshed buildings, upgraded graphics, and some revelations as to the island’s combat-scarred history.`,
-        rating: ''
+        rating: '0'
     },
     {
         id: '3277',
@@ -255,7 +255,7 @@ const gameData = [
         // NO IMG / placeholder image
         image_file: 'https://st4.depositphotos.com/2381417/26959/i/1600/depositphotos_269592716-stock-photo-thumbnail-images-placeholder-forums-blogs.jpg',
         summary: `Steam app for wallpapers.`,
-        rating: ''
+        rating: '0'
     }
 ];
 
