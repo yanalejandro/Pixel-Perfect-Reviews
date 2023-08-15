@@ -21,4 +21,19 @@ router.post('/', async (req, res) => {
     }
 });
 
+// delete favorite review  
+router.delete('/:id', async (req, res) => {
+    try {
+        const favReview = await Review.findByPk(req.params.id);
+        await favReview.destroy();
+        res.status(200).json(favReview);
+    } 
+    catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+
+
 module.exports = router;
