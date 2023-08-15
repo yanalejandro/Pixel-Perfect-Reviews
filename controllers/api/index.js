@@ -3,7 +3,8 @@ const userRoutes = require('./userRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const gameRoutes = require('./gameRoutes');
 const commentRoutes = require('./commentRoutes');
-const favoriteRoutes =require('./favoriteRoutes');
+const favoriteRoutes = require('./favoriteRoutes');
+const wishListRoutes = require('./wishListRoutes');
 
 // send to userRoutes file when /users is in url
 router.use('/users', userRoutes);
@@ -16,5 +17,7 @@ router.use('/games', gameRoutes);
 router.use('/comments', commentRoutes);
 
 router.use('/favorites', favoriteRoutes);
+
+router.use('/wishList', wishListRoutes);
 
 module.exports = router;

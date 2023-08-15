@@ -1,19 +1,19 @@
 const router = require('express').Router();
-const { Review, User } = require('../../models');
+const { Game, User } = require('../../models');
 
-// add new favorite review
+// add new favorite game
 router.post('/', async (req, res) => {
     try {
         // grab current user
         const currentUser = await User.findByPk(req.session.user_id);
 
-        // grab selected review
-        const favReview = await Review.findByPk(req.body.reviewId);
+        // grab selected game
+        const favGame = await Game.findByPk(req.body.gameId);
 
         // save both in junction table
-        await currentUser.addReview(favReview, { through: User_Favs });
+        await currentUser.addGame(favGame, { through: User_Games });
     
-        res.status(200).json(favReview);
+        res.status(200).json(favGame);
     } 
     catch (err) {
         console.log(err);
