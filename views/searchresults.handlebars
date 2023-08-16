@@ -1,0 +1,13 @@
+<div class="tile is-parent">
+    <article class="tile is-child notification is-info">
+        <p class="title">Search Results</p>
+        <div class="section">
+            {{#each games as |game|}}
+            {{> gamelist}}
+            {{/each}}
+        </div>
+        </figure>
+        <p>Game not on the list?</p>
+        <a href="/newgames/search/{{search}}"><p>Search More</p></a>
+    </article>
+</div>

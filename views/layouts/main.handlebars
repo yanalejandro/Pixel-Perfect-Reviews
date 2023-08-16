@@ -1,48 +1,58 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Perfect Reviews</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Perfect Reviews</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
 
-  <body class="container is-fullhd" >
-             <div class="block p-5 level-item">
-                <h1 id="custom-title" class="tag is-large has-text-danger has-background-primary has-text-weight-bold">
-                Pixel Perfect Reviews
-                </h1>
-            </div>
-         </header>
-         <nav class="level">
-          <!-- Left side -->
-            <div class="level-left">
-              <div class="field has-addons">
-                <p class="control">
-                  <input class="input" type="text" placeholder="Insert Yoshi Sound">
-                </p>
-                <p class="control">
-                  <button class="button">
-                    Search
-                  </button>
-                </p>
-              </div>
-            </div>
-        
-          <!-- Right side -->
-          <div class="level-right">
-            <p class="level-item"><a>Log-in</a></p>
-            <p class="level-item"><a>Create Account</a></p>
-          </div>
-        </nav>
-        <main>
+<body class="container is-fullhd">
+  <div class="block p-5 level-item">
+    <a href="/">
+    <h1 id="custom-title" class="tag is-large has-text-danger has-background-primary has-text-weight-bold">
+      Pixel Perfect Reviews
+    </h1>
+    </a>
+  </div>
+  </header>
+  <nav class="level">
+    <!-- Left side -->
+    <form id="search-game" class="level-left">
+      <div class="field has-addons">
+        <p class="control">
+          <input id="game-title" class="input" type="text" placeholder="Insert Yoshi Sound">
+        </p>
+        <p class="control">
+          <button  class="button" type="submit">
+            Search
+          </button>
+        </p>
+      </div>
+    </form>
+
+    <!-- Right side -->
+    <div class="level-right">
+      {{#if loggedIn}}
+      <p class="level-item"><button id="logout">Log-out</button></p>
+      <p class="level-item"><a href="/profile">Profile</a></p>
+      {{!-- only shows login if user is logged out --}}
+      {{else}}
+      <p class="level-item"><a href="/login">Log-in</a></p>
+      <p class="level-item"><a href="/signup">Create Account</a></p>
+      {{/if}}
+      
+    </div>
+  </nav>
+  <main>
     {{{ body }}}
-        </main>
-{{!-- if user is logged in, the logout script is available --}}
-        {{#if loggedIn}}
-        <script src="/js/logout.js"></script>
-        {{/if}}
+  </main>
+  {{!-- if user is logged in, the logout script is available --}}
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
+  <script src="/js/searchgame.js"></script>
 </body>
+
 </html>

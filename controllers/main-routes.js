@@ -68,11 +68,16 @@ router.get('/profile', Authenticate, async (req, res) => {
             include: [
                 {
                     model: Review,
-                    as: "favorite_reviews"
+                    include: 
+                {
+                    model: User
                 }
+                },
             ]
         });
         userReviews = userReviewData.get({ plain: true });
+
+        console.log(userReviews);
         
         res.render('profile', {
             userReviews,
@@ -93,7 +98,6 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
             include: [
                 {
                     model: Game,
-                    as: "favorite_games"
                 }
             ]
         });
@@ -102,7 +106,7 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
         // test
         console.log(userGames);
 
-        res.render('wish_list', {
+        res.render('wishlist', {
             userGames,
             loggedIn: req.session.loggedIn,
         });
@@ -137,7 +141,7 @@ router.get('/profile/my_reviews', Authenticate, async (req, res) => {
         // test
         console.log(reviews);
 
-        res.render('my_reviews', {
+        res.render('reviews', {
             reviews,
             loggedIn: req.session.loggedIn,
         });
@@ -156,28 +160,14 @@ router.get('/games/search/:term', async (req, res) => {
         // should get all games that contain the search term in their title
         const searchData = await sequelize.query(`(SELECT * FROM games where lower(title) LIKE '%${search}%')`);
 
-        // if the above gives us problems, we'll try the below...
-        // const searchData = await Game.findAll(
-        //     {
-        //         where: { title: {
-        //             [Op.substring]: `${search}`
-        //         } }
-        //     }
-        // ); 
-
         // shows results
-        console.log(searchData);
-
-        const games = searchData.get({ plain: true });
-
-        // test: does not show results?
-        console.log(games);
+        console.log(searchData[0]);
 
         // send games to search results handlebar
-        // may need to change games to searchData and get data from there if games does not work
         res.render('searchresults', {
-            games,
+            games: searchData[0],
             loggedIn: req.session.loggedIn,
+            search
         });
     }
     catch (err) {
@@ -210,7 +200,7 @@ router.get('/newgames/search/:search', async (req, res) => {
             console.log(searchResults);
 
             res.render('newgames', {
-                searchResults,
+                games: searchResults,
                 loggedIn: req.session.loggedIn,
             });
         }
@@ -237,7 +227,10 @@ router.get('/games/:id', Authenticate, async (req, res) => {
                     'hour_played',
                     'recommendation',
                     'review',
-                    'user_id'
+                    'user_id',
+                    'title',
+                    'game_id',
+                    'id'
                 ],
                 // get user for review
                 include: [
@@ -270,12 +263,12 @@ router.get('/games/:id', Authenticate, async (req, res) => {
     });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
 // get selected review by given id
-router.get('/reviews/:id', async (req, res) => {
+router.get('/reviews/:id', Authenticate, async (req, res) => {
     try {
     // search database for a review with an id (pk) that matches
     // include the name of the user that created it

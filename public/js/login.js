@@ -1,5 +1,5 @@
 const loginFormHandler = async (event) => {
-  event.preventdefault();
+  event.preventDefault();
 
 
   const username = document.querySelector('#username-login').value.trim();
@@ -16,12 +16,11 @@ const loginFormHandler = async (event) => {
       // if user is signed in go to their profile
       document.location.replace('/profile');
     } else {
-      alert(response.statusText);
+      alert('Could not log in!');
     }
   }
 };
 
 document  
-.querySelector('.login-form')
-.addEventListener('submit', loginFormHandler);
+.querySelector('#login-form').addEventListener('submit', loginFormHandler);
 

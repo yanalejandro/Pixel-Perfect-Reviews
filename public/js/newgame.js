@@ -3,23 +3,23 @@ async function newFormHandler (event) {
 
     // get info from selected game (queries will need to be changed to match what is in handlebars)
     // these queries are temporary and will probably be changed to reference data-attributes added in later
-    const id = document.querySelector('#id').value;
-    const title = document.querySelector('#title').value;
-    const summary = document.querySelector('#summary').value;
-    const rating = document.querySelector('#rating').value;
-    const coverId = document.querySelector('#coverId').value;
+    const id = document.querySelector('#dataholder').getAttribute('data-id');
+    const title = document.querySelector('#dataholder').getAttribute('data-name');
+    const summary = document.querySelector('#dataholder').getAttribute('data-summary');
+    let rating = document.querySelector('#dataholder').getAttribute('data-rating');
+    const coverId = document.querySelector('#dataholder').getAttribute('data-cover');
 
     // default image file
     let image_file = `https://st4.depositphotos.com/2381417/26959/i/1600/depositphotos_269592716-stock-photo-thumbnail-images-placeholder-forums-blogs.jpg`;
 
 
-    // if there is no cover id provided (set equal to 0 when added in handlebar)
-    if (coverId == 0) {
+    // // if there is no cover id provided (set equal to 0 when added in handlebar)
+    if (coverId == "") {
         image_file = `https://st4.depositphotos.com/2381417/26959/i/1600/depositphotos_269592716-stock-photo-thumbnail-images-placeholder-forums-blogs.jpg`;
     }
     else {
         // get image file from api
-        const newResponse = await fetch(`https://api.igdb.com/v4/covers`, {
+        const newResponse = await fetch(`https://floating-headland-95050.herokuapp.com/https://api.igdb.com/v4/covers`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -44,6 +44,16 @@ async function newFormHandler (event) {
         }
     }
 
+    if (rating == "") {
+        rating = 0;
+    }
+
+    console.log(id);
+    console.log(title);
+    console.log(image_file);
+    console.log(summary);
+    console.log(rating);
+
     // create new game
     const response = await fetch(`/api/games`, {
         method: 'POST',
@@ -65,4 +75,5 @@ async function newFormHandler (event) {
         alert(response.statusText);
     }
 }
-document.querySelector('.new-review-form').addEventListener('submit', newFormHandler);
+
+document.querySelector('#add-game').addEventListener('click', newFormHandler);

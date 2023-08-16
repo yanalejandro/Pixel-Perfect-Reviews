@@ -1,0 +1,59 @@
+<section class="box p-1 m-6">
+    <header class="level is-mobile">
+        <h2 class="level-item has-text-centered title" id="game-title">{{game.title}}</h2>
+        <p class="level-item has-text-centered">Rating: {{game.rating}}</p>
+    </header>
+    {{#if game.image_file}}
+    <figure class="image is-128x128">
+        <img src="{{game.image_file}}">
+    </figure>
+    {{else}}
+    <figure class="image is-128x128">
+        <img src="https://st4.depositphotos.com/2381417/26959/i/1600/depositphotos_269592716-stock-photo-thumbnail-images-placeholder-forums-blogs.jpg">
+    </figure>
+    {{/if}}
+    <p class="p-5 container is-fullhd">{{game.summary}}</p>
+    <label class="checkbox">
+        <input class="title" type="checkbox" id="check" onclick="showForm()">
+        + Add a Review!
+    </label>
+</section>
+
+<div class="box p-1 m-6" id="hide">
+    <form class="p-5 m-0" id="new-review-form">
+        <div class="field">
+            <label class="label" for="recommend">Would you recommend it?:</label>
+            <div class="select" id="recommend">
+                <select id="recvalue">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="hours-played">Hours spent playing:</label>
+            <input class="input" type="text" id="hours-played"></input>
+        </div>
+        <div class="field">
+            <label class="label" for="review-text">Review text:</label>
+            <textarea class="input" type="text" id="review-text" data-title="{{game.title}}"></textarea>
+        </div>
+        <div>
+            <button class="button custom-button" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+{{!-- cycle through any reviews --}}
+<div>
+    {{#if game.reviews}}
+    {{#each game.reviews as |review|}}
+    {{> reviewlist}}
+    {{/each}}
+    {{else}}
+    <p>This game has no reviews yet</p>
+    {{/if}}
+</div>
+
+<script src="../js/showForm.js"></script>
+<script src="../js/review.js"></script>
