@@ -30,7 +30,6 @@
                 </p>
               </div>
             </div>
-          </div>
         
           <!-- Right side -->
           <div class="level-right">
@@ -39,10 +38,11 @@
           </div>
         </nav>
         <main>
-        </main>
-        <script src="/js/logout.js"></script>
-    </div>
     {{{ body }}}
-</div>
+        </main>
+{{!-- if user is logged in, the logout script is available --}}
+        {{#if loggedIn}}
+        <script src="/js/logout.js"></script>
+        {{/if}}
 </body>
 </html>
