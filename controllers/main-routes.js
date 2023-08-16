@@ -142,7 +142,7 @@ router.get('/profile/my_reviews', Authenticate, async (req, res) => {
         // test
         console.log(reviews);
 
-        res.render('my_reviews', {
+        res.render('reviews', {
             reviews,
             loggedIn: req.session.loggedIn,
         });
