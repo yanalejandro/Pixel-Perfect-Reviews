@@ -242,7 +242,9 @@ router.get('/games/:id', Authenticate, async (req, res) => {
                     'hour_played',
                     'recommendation',
                     'review',
-                    'user_id'
+                    'user_id',
+                    'title',
+                    'game_id'
                 ],
                 // get user for review
                 include: [

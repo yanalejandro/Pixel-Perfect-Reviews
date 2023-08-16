@@ -1,0 +1,16 @@
+<section class="box p-1 m-6">
+    <header class="level is-mobile">
+        <h2 class="level-item has-text-centered title" id="review-title">{{game.title}}</h2>
+        <p class="level-item has-text-centered">Rating: {{game.rating}}</p>
+    </header>
+    <figure class="image is-128x128">
+            <img src="{{game.image_file}}">
+    </figure>
+    <p class="p-5 container is-fullhd">{{game.summary}}</p>
+</section>
+{{!-- cycle through any reviews --}}
+<div>
+    {{#each game.reviews as |review|}}
+    {{> reviewlist}}
+    {{/each}}
+</div>

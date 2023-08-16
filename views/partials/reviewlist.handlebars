@@ -1,11 +1,12 @@
 <div class="tile is-parent">
-    <a href="/reviews/{{id}}">
-        <article class="tile is-child notification is-info">
-            <a href="/games/{{game_id}}">
-                <p class="title">{{title}}</p>
-            </a>
-            <p>{{review}}</p>
-            <p>--{{user.username}} {{date_posted}}</p>
-        </article>
-    </a>
+    <article class="tile is-child notification is-info">
+        <a href="/games/{{game_id}}">
+            <p class="title">{{title}}</p>
+        </a>
+        <a href="/reviews/{{id}}">
+            <p>Go to Review Page</p>
+        </a>
+        <p>{{review}}</p>
+        <p>--{{user.username}} {{date_posted}}</p>
+    </article>
 </div>
