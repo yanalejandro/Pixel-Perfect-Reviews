@@ -1,12 +1,13 @@
-
-<div class="tile is-parent">
-  <a href="/games/{{id}}">
-    <article class="tile is-child notification is-info">
-      <p class="title">{{title}}</p>
-      <figure class="image is-128x128">
-        <img src="{{image_file}}">
-      </figure>
-      <p>{{summary}}</p>
-    </article>
-  </a>
+<div class="box p-1 m-6 has-background-primary">
+  <div class="tile is-parent is-primary">
+    <a href="/games/{{id}}" class="level container is-widescreen">
+      <article class="tile is-child notification level level-item is-primary custom">
+        <p class="title level-item custom">{{title}}</p>
+        <figure class="image is-128x128 level-item">
+          <img src="{{image_file}}">
+        </figure>
+        <p class="custom">{{summary}}</p>
+      </article>
+    </a>
+  </div>
 </div>

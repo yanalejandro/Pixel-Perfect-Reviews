@@ -1,18 +1,18 @@
-<section class="box p-1 m-6">
+<section class="box p-1 m-6 has-background-primary">
     <header class="level is-mobile">
         <a href="/games/{{review.game_id}}"><h2 class="level-item has-text-centered title" id="review-title" data-post="{{review.id}}">{{review.title}}</h2></a>
         <p class="level-item has-text-centered">Created by: {{review.user.username}} {{review.date_posted}}</p>
     </header>
+    <button class="button is-danger" id="fav">Save to Favorites</button>
     <p class="p-5 container is-fullhd">{{review.review}}</p>
+    <label class="checkbox level-item title">
+        <input class="title" type="checkbox" id="check" onclick="showForm()">
+        + Add a Comment!
+    </label>
 </section>
-{{!-- cycle through any comments --}}
-<div>
-    {{#each review.comments as |comment|}}
-    {{> commentlist}}
-    {{/each}}
-</div>
-<div class="box p-1 m-6 custom-box">
-    <h2 class="title p-2 custom-text"></h2>
+
+<div class="box p-1 m-6 has-background-danger" id="hide">
+    <h2 class="title p-2"></h2>
     <form class="p-5 m-0" id="comment-form">
         <div class="field">
             <label class="label" for="comment-text">Comment:</label>
@@ -24,5 +24,14 @@
     </form>
 </div>
 
+{{!-- cycle through any comments --}}
+<div>
+    {{#each review.comments as |comment|}}
+    {{> commentlist}}
+    {{/each}}
+</div>
+
+<script src="../js/showForm.js"></script>
 {{!-- script to go to create comment screen --}}
 <script src="../js/comment.js"></script>
+<script src="../js/favorites.js"></script>
