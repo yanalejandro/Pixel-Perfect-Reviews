@@ -19,11 +19,11 @@ router.get('/', async (req, res) => {
 
         // sends all games and if user is logged in or not to dashboard
         // the loggedIn is just so we can either have login or logout showing depending
-        // res.render('dashboard', {
-        //     games,
-        //     loggedIn: req.session.loggedIn
-        // })
-        res.status(200).json(games);
+        res.render('dashboard', {
+            games,
+            loggedIn: req.session.loggedIn
+        });
+        // res.status(200).json(games);
     }
     catch (err) {
         console.log(err);
