@@ -22,11 +22,13 @@ router.get('/', async (req, res) => {
         res.render('dashboard', {
             games,
             loggedIn: req.session.loggedIn
-        })
+        });
+        // res.status(200).json(games);
     }
     catch (err) {
         console.log(err);
-        res.status(500).json(err);
+        // res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -152,7 +154,7 @@ router.get('/games/search/:term', async (req, res) => {
         const search = req.params.term.toLowerCase();
 
         // should get all games that contain the search term in their title
-        const searchData = await sequelize.query(`(SELECT * FROM game_db.games where lower(title) LIKE '%${search}%')`);
+        const searchData = await sequelize.query(`(SELECT * FROM games where lower(title) LIKE '%${search}%')`);
 
         // if the above gives us problems, we'll try the below...
         // const searchData = await Game.findAll(
