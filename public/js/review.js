@@ -37,7 +37,8 @@ async function newFormHandler (event) {
     }
   });
   if (response.ok) {
-    document.location.replace('/dashboard');
+    // reload current game page to show added review
+    document.location.reload();
   } else {
     alert(response.statusText);
   }
