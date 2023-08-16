@@ -6,6 +6,11 @@
         <a href="/reviews/{{id}}">
             <p>Go to Review Page</p>
         </a>
+        {{#if recommendation}}
+        <p>Recommend: Yes</p>
+        {{else}}
+        <p>Recommend: No</p>
+        {{/if}}
         <p>{{review}}</p>
         <p>--{{user.username}} {{date_posted}}</p>
     </article>

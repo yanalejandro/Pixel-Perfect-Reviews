@@ -244,7 +244,8 @@ router.get('/games/:id', Authenticate, async (req, res) => {
                     'review',
                     'user_id',
                     'title',
-                    'game_id'
+                    'game_id',
+                    'id'
                 ],
                 // get user for review
                 include: [
@@ -282,7 +283,7 @@ router.get('/games/:id', Authenticate, async (req, res) => {
 });
 
 // get selected review by given id
-router.get('/reviews/:id', async (req, res) => {
+router.get('/reviews/:id', Authenticate, async (req, res) => {
     try {
     // search database for a review with an id (pk) that matches
     // include the name of the user that created it
