@@ -250,10 +250,10 @@ router.get('/games/:id', Authenticate, async (req, res) => {
 
     // test: its a very long list, so I commented it out
     // console.log(game);
-    // how to access one review
-    console.log(game.reviews[0]);
-    // how to access the review's creator
-    console.log(game.reviews[0].user.username);
+    // // how to access one review
+    // console.log(game.reviews[0]);
+    // // how to access the review's creator
+    // console.log(game.reviews[0].user.username);
 
     // the game is sent to show the handlebars file we have for showing a specific game
     // if we want to show it in a different handlebars file, we'll just change the name in the ''
