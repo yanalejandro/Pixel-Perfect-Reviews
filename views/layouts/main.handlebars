@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixel Perfect Reviews</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body class="container is-fullhd">
+<body class="container is-fullhd bg-img">
   <div class="block p-5 level-item">
     <a href="/">
     <h1 id="custom-title" class="tag is-large has-text-danger has-background-primary has-text-weight-bold">
@@ -22,10 +23,10 @@
     <form id="search-game" class="level-left">
       <div class="field has-addons">
         <p class="control">
-          <input id="game-title" class="input" type="text" placeholder="Insert Yoshi Sound">
+          <input id="game-title" class="input" type="text" placeholder="Search a Game">
         </p>
         <p class="control">
-          <button  class="button" type="submit">
+          <button  class="button is-danger" type="submit">
             Search
           </button>
         </p>
@@ -35,12 +36,12 @@
     <!-- Right side -->
     <div class="level-right">
       {{#if loggedIn}}
-      <p class="level-item"><button id="logout">Log-out</button></p>
-      <p class="level-item"><a href="/profile">Profile</a></p>
+      <p class="level-item"><button class="button is-danger" id="logout">Log-out</button></p>
+      <p class="level-item"><a class="button is-danger" href="/profile">Profile</a></p>
       {{!-- only shows login if user is logged out --}}
       {{else}}
-      <p class="level-item"><a href="/login">Log-in</a></p>
-      <p class="level-item"><a href="/signup">Create Account</a></p>
+      <p class="level-item"><a class="button is-danger" href="/login">Log-in</a></p>
+      <p class="level-item"><a class="button is-danger" href="/signup">Create Account</a></p>
       {{/if}}
       
     </div>

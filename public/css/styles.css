@@ -1,0 +1,20 @@
+*{
+    text-decoration: none;
+}
+
+.custom{
+    text-decoration: none;
+}
+
+.bg-img { 
+    background-image: url(https://wallpapercave.com/wp/wp4623529.jpg);
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;
+}
+
+input[type=checkbox]{
+    opacity: 0;
+}
