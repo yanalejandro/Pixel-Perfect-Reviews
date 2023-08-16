@@ -1,25 +1,48 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Perfect Reviews</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   </head>
-  <body>
-    <section class="section">
-      <div class="container">
-        <h1 class="title">
-          Hello World
-        </h1>
-        <p class="subtitle">
-          My first website with <strong>Bulma</strong>!
-        </p>
-      </div>
-    </section>
-    {{!-- This is where all the selected views will show up --}}
-    <main>
-      {{{ body }}}
-    </main>
-  </body>
+
+  <body class="container is-fullhd" >
+             <div class="block p-5 level-item">
+                <h1 id="custom-title" class="tag is-large has-text-danger has-background-primary has-text-weight-bold">
+                Pixel Perfect Reviews
+                </h1>
+            </div>
+         </header>
+         <nav class="level">
+          <!-- Left side -->
+            <div class="level-left">
+              <div class="field has-addons">
+                <p class="control">
+                  <input class="input" type="text" placeholder="Insert Yoshi Sound">
+                </p>
+                <p class="control">
+                  <button class="button">
+                    Search
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        
+          <!-- Right side -->
+          <div class="level-right">
+            <p class="level-item"><a>Log-in</a></p>
+            <p class="level-item"><a>Create Account</a></p>
+          </div>
+        </nav>
+        <main>
+        </main>
+        <script src="/js/logout.js"></script>
+    </div>
+    {{{body}}}
+</div>
+</body>
 </html>

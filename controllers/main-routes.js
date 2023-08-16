@@ -221,7 +221,7 @@ router.get('/newgames/search/:search', async (req, res) => {
 
 // get selected game by given id
 // NOTE: we currently have no games, so this wont do anything yet
-router.get('/games/:id', async (req, res) => {
+router.get('/games/:id', Authenticate, async (req, res) => {
     try {
     // search database for a game with an id (pk) that matches
     // get the reviews for the game and the users that made them
