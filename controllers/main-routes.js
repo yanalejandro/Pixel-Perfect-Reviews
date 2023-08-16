@@ -98,7 +98,6 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
             include: [
                 {
                     model: Game,
-                    as: "favorite_games"
                 }
             ]
         });
@@ -107,7 +106,7 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
         // test
         console.log(userGames);
 
-        res.render('wish_list', {
+        res.render('wishlist', {
             userGames,
             loggedIn: req.session.loggedIn,
         });
