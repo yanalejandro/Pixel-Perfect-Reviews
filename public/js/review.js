@@ -1,11 +1,11 @@
 async function newFormHandler (event) {
   event.preventDefault();
-  const title = document.querySelector('input[name="review-title"]').value;
-  const review = document.querySelector('input[name="review"]').value;
-  const hour_played = document.querySelector('input[name="hours-played"]').value;
+  const title = document.querySelector('#review-text').getAttribute('data-title');
+  const review = document.querySelector('#review-text').value.trim();
+  const hour_played = document.querySelector('#hours-played').value.trim();
 
-  // may need to change if recommend is not an input type (user should either put yes or no which will become 1 or 0)
-  const recommendation = document.querySelector('input[name="recommend"]').value;
+  // user should either put yes or no which will become 1 or 0
+  const recommendation = document.querySelector('#recvalue').value;
 
   // get game id from end of url
   const game_id = window.location.toString().split('/')[
@@ -43,5 +43,5 @@ async function newFormHandler (event) {
     alert(response.statusText);
   }
 }
-document.querySelector('.new-review-form').addEventListener('submit', newFormHandler);
+document.querySelector('#new-review-form').addEventListener('submit', newFormHandler);
 

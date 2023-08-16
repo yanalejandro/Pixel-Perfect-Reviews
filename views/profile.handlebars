@@ -1,21 +1,28 @@
-{{!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  </head>
-  <body> --}}
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Profile
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
+
+<nav class="level">
+    <div class="level-item">
+      <p class="level-item"><a href="/profile">Favorite Reviews</a></p>
     </div>
-  </section>
-  {{!-- </body>
-</html> --}}
+    <div class="level-item">
+      <p class="level-item"><a href="/profile/my_reviews">My Reviews</a></p>
+    </div>
+    <div class="level-item">
+      <p class="level-item"><a href="/profile/wish_list">My Wish List</a></p>
+    </div>
+
+</nav>
+<div class="tile is-parent">
+        <article class="tile is-child notification is-info">
+          <p class="title">Your Favorited Reviews</p>
+          {{#if reviews}}
+          <div class="section">
+            {{#each reviews as |review|}}
+            {{> reviewlist}}
+            {{/each}}
+          </div>
+          {{else}}
+          <div>You have no favorites saved</div>
+          {{/if}}
+          </figure>
+        </article>
+    </div>
