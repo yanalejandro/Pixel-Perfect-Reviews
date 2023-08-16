@@ -160,28 +160,14 @@ router.get('/games/search/:term', async (req, res) => {
         // should get all games that contain the search term in their title
         const searchData = await sequelize.query(`(SELECT * FROM games where lower(title) LIKE '%${search}%')`);
 
-        // if the above gives us problems, we'll try the below...
-        // const searchData = await Game.findAll(
-        //     {
-        //         where: { title: {
-        //             [Op.substring]: `${search}`
-        //         } }
-        //     }
-        // ); 
-
         // shows results
-        console.log(searchData);
-
-        const games = searchData.get({ plain: true });
-
-        // test: does not show results?
-        console.log(games);
+        console.log(searchData[0]);
 
         // send games to search results handlebar
-        // may need to change games to searchData and get data from there if games does not work
         res.render('searchresults', {
-            games,
+            games: searchData[0],
             loggedIn: req.session.loggedIn,
+            search
         });
     }
     catch (err) {

@@ -5,7 +5,7 @@ async function newFormHandler (event) {
     const title = document.querySelector('#game-title').value;
 
     // go to search page
-    document.location.replace(`games/search/${title}`);
+    document.location.replace(`/games/search/${title}`);
 }
 
 document.querySelector('#search-game').addEventListener('submit', newFormHandler);
