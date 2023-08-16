@@ -1,8 +1,7 @@
-.bg-img { 
-    background-image: url(http://portfolio.dustweb.org/web/frankensite/images/yoshiBanner.png);
-    background-position: center center;
-    background-repeat:  no-repeat;
-    background-attachment: fixed;
-    background-size:  cover;
-    background-color: #999;
+
+.img-responsive {
+    background-image: url(https://www.itl.cat/pngfile/big/21-216273_yoshi-wallpaper-hd-groovy-wallpapers-these-video-game.jpg);
+    display: block; 
+    max-width: 100%;
+    height: auto;
 }
