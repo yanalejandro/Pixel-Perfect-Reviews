@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
             title: req.body.title,
             image_file: req.session.image_file,
             summary: req.body.summary,
-            rating: req.body.summary
+            rating: req.body.rating
         });
     
         res.status(200).json(gameData);

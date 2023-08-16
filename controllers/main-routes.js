@@ -200,7 +200,7 @@ router.get('/newgames/search/:search', async (req, res) => {
             console.log(searchResults);
 
             res.render('newgames', {
-                searchResults,
+                games: searchResults,
                 loggedIn: req.session.loggedIn,
             });
         }
@@ -263,7 +263,7 @@ router.get('/games/:id', Authenticate, async (req, res) => {
     });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
