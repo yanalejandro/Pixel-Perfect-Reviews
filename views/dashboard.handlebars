@@ -2,6 +2,11 @@
         <article class="tile is-child notification is-info">
           <p class="title">Most Reviewed Games</p>
           <p class="subtitle">With an image</p>
+          <div class="section">
+            {{#each games as | game |}}
+            {{> gamelist}}
+            {{/each}}
+          </div>
           </figure>
         </article>
     </div>
