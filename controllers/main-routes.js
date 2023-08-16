@@ -68,11 +68,16 @@ router.get('/profile', Authenticate, async (req, res) => {
             include: [
                 {
                     model: Review,
-                    as: "favorite_reviews"
+                    include: 
+                {
+                    model: User
                 }
+                },
             ]
         });
         userReviews = userReviewData.get({ plain: true });
+
+        console.log(userReviews);
         
         res.render('profile', {
             userReviews,

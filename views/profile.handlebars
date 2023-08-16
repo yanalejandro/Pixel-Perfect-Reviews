@@ -1,11 +1,16 @@
 
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Profile
-      </h1>
-      <p class="subtitle">
-        My first website with <strong>Bulma</strong>!
-      </p>
+<div class="tile is-parent">
+        <article class="tile is-child notification is-info">
+          <p class="title">Your Favorited Reviews</p>
+          {{#if reviews}}
+          <div class="section">
+            {{#each reviews as |review|}}
+            {{> reviewlist}}
+            {{/each}}
+          </div>
+          {{else}}
+          <div>You have no favorites saved</div>
+          {{/if}}
+          </figure>
+        </article>
     </div>
-  </section>
