@@ -14,9 +14,6 @@ router.get('/', async (req, res) => {
         // clean up data
         const games = gameData.map((game) => game.get({plain: true}));
 
-        // test
-        console.log(games);
-
         // sends all games and if user is logged in or not to dashboard
         // the loggedIn is just so we can either have login or logout showing depending
         res.render('dashboard', {
@@ -26,8 +23,6 @@ router.get('/', async (req, res) => {
         // res.status(200).json(games);
     }
     catch (err) {
-        console.log(err);
-        // res.status(500).json(err);
         res.render('404');
     }
 });
@@ -76,8 +71,6 @@ router.get('/profile', Authenticate, async (req, res) => {
             ]
         });
         userReviews = userReviewData.get({ plain: true });
-
-        console.log(userReviews);
         
         res.render('profile', {
             userReviews,
@@ -85,7 +78,6 @@ router.get('/profile', Authenticate, async (req, res) => {
         });
     } 
     catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 });
@@ -103,8 +95,6 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
         });
         userGames = userGameData.get({ plain: true });
 
-        // test
-        console.log(userGames);
 
         res.render('wishlist', {
             userGames,
@@ -112,7 +102,6 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
         });
     }
     catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 });
@@ -138,8 +127,6 @@ router.get('/profile/my_reviews', Authenticate, async (req, res) => {
             review.get({ plain: true })
         );
 
-        // test
-        console.log(reviews);
 
         res.render('reviews', {
             reviews,
@@ -147,7 +134,6 @@ router.get('/profile/my_reviews', Authenticate, async (req, res) => {
         });
     }
     catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 });
@@ -159,9 +145,6 @@ router.get('/games/search/:term', async (req, res) => {
 
         // should get all games that contain the search term in their title
         const searchData = await sequelize.query(`(SELECT * FROM games where lower(title) LIKE '%${search}%')`);
-
-        // shows results
-        console.log(searchData[0]);
 
         // send games to search results handlebar
         res.render('searchresults', {
@@ -196,8 +179,6 @@ router.get('/newgames/search/:search', async (req, res) => {
         if (newResponse.ok) {
             const searchResults = await newResponse.json();
 
-            // test
-            console.log(searchResults);
 
             res.render('newgames', {
                 games: searchResults,
@@ -247,13 +228,6 @@ router.get('/games/:id', Authenticate, async (req, res) => {
 
     // '.get({ plain: true })' so that it only has the data we want
     const game = gameData.get({ plain: true });
-
-    // test: its a very long list, so I commented it out
-    // console.log(game);
-    // // how to access one review
-    // console.log(game.reviews[0]);
-    // // how to access the review's creator
-    // console.log(game.reviews[0].user.username);
 
     // the game is sent to show the handlebars file we have for showing a specific game
     // if we want to show it in a different handlebars file, we'll just change the name in the ''
@@ -312,8 +286,6 @@ router.get('/reviews/:id', Authenticate, async (req, res) => {
     // '.get({ plain: true })' so that it only has the data we want
     const review = reviewData.get({ plain: true });
 
-    // test
-    console.log(review);
 
     // the review is sent to show the handlebars file we have for showing a specific review
     // if we want to show it in a different handlebars file, we'll just change the name in the ''
