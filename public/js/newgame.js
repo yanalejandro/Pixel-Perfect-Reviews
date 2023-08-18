@@ -48,26 +48,28 @@ const clickHandler = async function (event) {
         console.log(summary);
         console.log(rating);
 
-        // // create new game
-        // const response = await fetch(`/api/games`, {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //         id,
-        //         title,
-        //         image_file,
-        //         summary,
-        //         rating
-        //     }),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // });
-        // if (response.ok) {
-        //     // go to newly created game page
-        //     document.location.replace(`/games/${id}`);
-        // } else {
-        //     alert(response.statusText);
-        // }
+        // create new game
+        const response = await fetch(`/api/games`, {
+            method: 'POST',
+            body: JSON.stringify({
+                id,
+                title,
+                image_file,
+                summary,
+                rating
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (response.ok) {
+            // go to newly created game page
+            document.location.replace(`/games/${id}`);
+        } else {
+            alert("This game has already been added!");
+            // still go to the game location
+            document.location.replace(`/games/${id}`);
+        }
     }
 };
 
