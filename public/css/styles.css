@@ -18,3 +18,7 @@
 input[type=checkbox]{
     opacity: 0;
 }
+
+.navbar {
+    background-color: hsl(0 100% 100% / 0.1);
+}
