@@ -13,6 +13,7 @@
     background-attachment: fixed;
     background-size:  cover;
     background-color: #999;
+    min-height: 100vh;
 }
 
 input[type=checkbox]{
