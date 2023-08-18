@@ -179,9 +179,27 @@ router.get('/newgames/search/:search', async (req, res) => {
         if (newResponse.ok) {
             const searchResults = await newResponse.json();
 
+            const fixedResults = [];
+
+            // get rid of new line characters and tabs in summary
+            for (let i = 0; i < searchResults.length; i++)
+            {
+                let temp = searchResults[i].summary.replace(/\n|\t|\v/g,'');
+
+                let game = {
+                    id: searchResults[i].id,
+                    cover: searchResults[i].cover,
+                    name: searchResults[i].name,
+                    summary: temp,
+                    total_rating: searchResults[i].total_rating
+                };
+
+                fixedResults.push(game);
+            }
+            
 
             res.render('newgames', {
-                games: searchResults,
+                games: fixedResults,
                 loggedIn: req.session.loggedIn,
             });
         }
