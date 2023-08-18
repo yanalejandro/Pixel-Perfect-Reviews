@@ -43,9 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-app.use((req, res, next) => {
-    res.status(404).redirect('./views/404.handlebars')
-})
 
 // do not overwrite data (force: false)
 sequelize.sync({ force: false }).then(() => {
