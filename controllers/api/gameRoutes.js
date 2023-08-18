@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
         const gameData = await Game.create({
             id: req.body.id,
             title: req.body.title,
-            image_file: req.session.image_file,
+            image_file: req.body.image_file,
             summary: req.body.summary,
             rating: req.body.rating
         });
@@ -18,7 +18,6 @@ router.post('/', async (req, res) => {
         res.status(200).json(gameData);
     } 
     catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 });
