@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Game } = require('../../models');
 
+
 // add new game when given game info
 // if we use the api for games, we can save searched games
 // in here to reduce the amount of api calls we have to make
@@ -21,5 +22,7 @@ router.post('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
 
 module.exports = router;
