@@ -1,15 +1,8 @@
 <div class="tile is-parent has-background-primary">
-    <form id="new-game">
-        <div class="field" id="dataholder" data-id="{{id}}" data-cover="{{cover}}" data-name="{{name}}"
-            data-summary="{{summary}}" data-rating="{{total_rating}}"></div>
-        <div>
-            <button id="add-game" type="submit">
-                <article class="tile is-child notification is-danger">
-                    <p class="title">{{name}}</p>
-                    <p>{{summary}}</p>
-                </article>
-            </button>
-        </div>
-    </form>
+    <button class="add-game button is-danger" type="submit" data-id="{{id}}" data-cover="{{cover}}" data-name="{{name}}"
+        data-summary="{{summary}}" data-rating="{{total_rating}}">Add Game</button>
+    <article class="tile is-child notification is-primary">
+        <p class="title">{{name}}</p>
+        <p>{{summary}}</p>
+    </article>
 </div>
-

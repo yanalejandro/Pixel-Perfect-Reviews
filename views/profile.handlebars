@@ -1,19 +1,19 @@
 
 <nav class="level">
     <div class="level-item">
-      <p class="level-item"><a class="button is-primary" href="/profile">Favorite Reviews</a></p>
+      <p class="level-item"><a class="button is-danger is-large" href="/profile">Favorite Reviews</a></p>
     </div>
     <div class="level-item">
-      <p class="level-item"><a class="button is-primary" href="/profile/my_reviews">My Reviews</a></p>
+      <p class="level-item"><a class="button is-primary is-large" href="/profile/my_reviews">My Reviews</a></p>
     </div>
     <div class="level-item">
-      <p class="level-item"><a class="button is-primary" href="/profile/wish_list">My Wish List</a></p>
+      <p class="level-item"><a class="button is-primary is-large" href="/profile/wish_list">My Wish List</a></p>
     </div>
 
 </nav>
 <div class="tile is-parent">
-        <article class="tile is-child notification is-danger">
-          <p class="title">Your Favorited Reviews</p>
+        <article class="tile is-child">
+          {{!-- <p class="title tile notification is-danger is-8 m-6">Your Favorited Reviews</p> --}}
           {{#if userReviews.reviews}}
           <div class="section">
             {{#each userReviews.reviews as |review|}}

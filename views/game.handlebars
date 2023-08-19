@@ -1,20 +1,26 @@
 <section class="box p-1 m-6 has-background-primary">
     <header class="level is-mobile">
-        <h2 class="level-item has-text-centered title" id="game-title">{{game.title}}</h2>
-        <p class="level-item has-text-centered">Rating: {{game.rating}}</p>
+        <div class="level-item">
+            <button class="button is-danger m-3" id="wish">Save to Wishlist</button>
+        </div>
+        <h2 class="level-item has-text-centered title mt-5 has-text-white has-text-weight-bold is-size-1" id="game-title">{{game.title}}</h2>
+        <p class="level-item has-text-centered subtitle m-2 has-text-white">Rating:&nbsp<strong class="has-text-danger"> {{game.rating}}</strong>/100</p>
     </header>
-    <button class="button is-danger" id="wish">Save to Wishlist</button>
-    {{#if game.image_file}}
-    <figure class="image is-128x128 level-right">
-        <img src="{{game.image_file}}">
-    </figure>
-    {{else}}
-    <figure class="image is-128x128 level-item">
-        <img src="https://st4.depositphotos.com/2381417/26959/i/1600/depositphotos_269592716-stock-photo-thumbnail-images-placeholder-forums-blogs.jpg">
-    </figure>
-    {{/if}}
-    <p class="p-5 container is-fullhd level-item">{{game.summary}}</p>
-    <label class="checkbox level-item title">
+
+    <div class="card-image has-text-centered level-item">
+        {{#if game.image_file}}
+        <figure class=" inline-block m-3">
+            <img src="{{game.image_file}}" width="350" height="350">
+        </figure>
+        {{else}}
+        <figure class=" inline-block m-3">
+            <img src="https://st4.depositphotos.com/2381417/26959/i/1600/depositphotos_269592716-stock-photo-thumbnail-images-placeholder-forums-blogs.jpg"
+                width="350" height="350">
+        </figure>
+        {{/if}}
+    </div>
+    <p class="p-5 container is-fullhd level-item subtitle">{{game.summary}}</p>
+    <label class="checkbox level-item button is-danger m-3">
         <input class="title" type="checkbox" id="check" onclick="showForm()">
         + Add a Review!
     </label>
@@ -40,7 +46,7 @@
             <textarea class="input" type="text" id="review-text" data-title="{{game.title}}"></textarea>
         </div>
         <div>
-            <button class="button custom-button" type="submit">Submit</button>
+            <button class="button is-danger" type="submit">Submit</button>
         </div>
     </form>
 </div>
