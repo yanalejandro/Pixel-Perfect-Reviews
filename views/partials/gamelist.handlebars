@@ -1,6 +1,4 @@
-<div class="box p-1 m-6 has-background-primary">
-  <div class="tile is-parent is-primary">
-    <a href="/games/{{id}}" class="level container is-widescreen">
+  <div class="tile is-parent is-primary level container is-5">
       <article class="tile is-child notification level level-item is-primary custom">
         <p class="title level-item custom">{{title}}</p>
         <div class="card-image has-text-centered level-item">
@@ -12,8 +10,6 @@
           {{/if}}
         </figure>
         </div>
-        <p class="custom">{{summary}}</p>
+        <a href="/games/{{id}}" class="level-item button is-danger m-4">Go to Game Page</a>
       </article>
-    </a>
   </div>
-</div>

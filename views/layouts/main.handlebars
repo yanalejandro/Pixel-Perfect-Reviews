@@ -9,16 +9,8 @@
   <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body class="container is-fullhd bg-img">
-  <div class="block p-5 level-item">
-    <a href="/">
-    <h1 id="custom-title" class="tag is-large has-text-danger has-background-primary has-text-weight-bold">
-      Pixel Perfect Reviews
-    </h1>
-    </a>
-  </div>
-  </header>
-  <nav class="level">
+<body class="container is-fullhd bg-img has-navbar-fixed-top">
+  <nav class="level navbar is-fixed-top is-transparent">
     <!-- Left side -->
     <form id="search-game" class="level-left">
       <div class="field has-addons">
@@ -26,12 +18,19 @@
           <input id="game-title" class="input" type="text" placeholder="Search a Game">
         </p>
         <p class="control">
-          <button  class="button is-danger" type="submit">
+          <button class="button is-danger" type="submit">
             Search
           </button>
         </p>
       </div>
     </form>
+
+    {{!-- center --}}
+    <div class="level-item m-2">
+      <a href="/">
+        <img src="/images/logo.png" alt="Pixel Perfect Reviews" width="250">
+      </a>
+    </div>
 
     <!-- Right side -->
     <div class="level-right">
@@ -43,10 +42,10 @@
       <p class="level-item"><a class="button is-danger" href="/login">Log-in</a></p>
       <p class="level-item"><a class="button is-danger" href="/signup">Create Account</a></p>
       {{/if}}
-      
     </div>
   </nav>
-  <main>
+  <div class="m-6"></div>
+  <main >
     {{{ body }}}
   </main>
   {{!-- if user is logged in, the logout script is available --}}
