@@ -184,19 +184,25 @@ router.get('/newgames/search/:search', async (req, res) => {
             // get rid of new line characters and tabs in summary
             for (let i = 0; i < searchResults.length; i++)
             {
-                let temp = searchResults[i].summary.replace(/\n|\t|\v/g,'');
+                let temp;
+                if(searchResults[i].summary) {
+                    temp = searchResults[i].summary.replace(/\n|\t|\v/g,'');
+                }
+                else {
+                    temp = '';
+                }
+                
 
                 let game = {
-                    id: searchResults[i].id,
-                    cover: searchResults[i].cover,
-                    name: searchResults[i].name,
+                    id: searchResults[i].id ? searchResults[i].id : '',
+                    cover: searchResults[i].cover ? searchResults[i].cover : '',
+                    name: searchResults[i].name ? searchResults[i].name : '',
                     summary: temp,
-                    total_rating: searchResults[i].total_rating
+                    total_rating: searchResults[i].total_rating ? searchResults[i].total_rating : 0
                 };
 
                 fixedResults.push(game);
             }
-            
 
             res.render('newgames', {
                 games: fixedResults,
