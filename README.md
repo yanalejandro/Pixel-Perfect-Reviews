@@ -28,8 +28,9 @@ This website was created by:
 * [Daniel Van Kirk](https://github.com/Neatartist)
 
 ## Links
-[Pixel Perfect reviews](#https://aqueous-garden-21223-0843a25d5cd3.herokuapp.com/) 
-[Github Repository](#https://github.com/yanalejandro/Pixel-Perfect-Reviews.git)
+[Pixel Perfect reviews](https://aqueous-garden-21223-0843a25d5cd3.herokuapp.com/) 
+
+[Github Repository](https://github.com/yanalejandro/Pixel-Perfect-Reviews.git)
 
 ## Screenshots
 ### HomePage
