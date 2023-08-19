@@ -78,7 +78,7 @@ router.get('/profile', Authenticate, async (req, res) => {
         });
     } 
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -102,7 +102,7 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
         });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -134,7 +134,7 @@ router.get('/profile/my_reviews', Authenticate, async (req, res) => {
         });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -154,7 +154,7 @@ router.get('/games/search/:term', async (req, res) => {
         });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -205,7 +205,7 @@ router.get('/newgames/search/:search', async (req, res) => {
         }
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 })
 
@@ -313,7 +313,7 @@ router.get('/reviews/:id', Authenticate, async (req, res) => {
     });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
