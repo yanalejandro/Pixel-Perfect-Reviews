@@ -1,11 +1,15 @@
 <div class="tile is-parent">
     <article class="tile is-child">
         <p class="title title tile notification is-danger is-8 m-6">Search Results</p>
+        {{#if games}}
         <div id="container">
             {{#each games as |game|}}
             {{> searchlist}}
             {{/each}}
         </div>
+        {{else}}
+        <div class=" notification is-danger">Game not found</div>
+        {{/if}}
         </figure>
     </article>
 </div>

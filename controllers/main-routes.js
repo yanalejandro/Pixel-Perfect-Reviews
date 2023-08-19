@@ -78,7 +78,7 @@ router.get('/profile', Authenticate, async (req, res) => {
         });
     } 
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -102,7 +102,7 @@ router.get('/profile/wish_list', Authenticate, async (req, res) => {
         });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -134,7 +134,7 @@ router.get('/profile/my_reviews', Authenticate, async (req, res) => {
         });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -154,7 +154,7 @@ router.get('/games/search/:term', async (req, res) => {
         });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
@@ -184,19 +184,25 @@ router.get('/newgames/search/:search', async (req, res) => {
             // get rid of new line characters and tabs in summary
             for (let i = 0; i < searchResults.length; i++)
             {
-                let temp = searchResults[i].summary.replace(/\n|\t|\v/g,'');
+                let temp;
+                if(searchResults[i].summary) {
+                    temp = searchResults[i].summary.replace(/\n|\t|\v/g,'');
+                }
+                else {
+                    temp = '';
+                }
+                
 
                 let game = {
-                    id: searchResults[i].id,
-                    cover: searchResults[i].cover,
-                    name: searchResults[i].name,
+                    id: searchResults[i].id ? searchResults[i].id : '',
+                    cover: searchResults[i].cover ? searchResults[i].cover : '',
+                    name: searchResults[i].name ? searchResults[i].name : '',
                     summary: temp,
-                    total_rating: searchResults[i].total_rating
+                    total_rating: searchResults[i].total_rating ? searchResults[i].total_rating : 0
                 };
 
                 fixedResults.push(game);
             }
-            
 
             res.render('newgames', {
                 games: fixedResults,
@@ -205,7 +211,7 @@ router.get('/newgames/search/:search', async (req, res) => {
         }
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 })
 
@@ -313,7 +319,7 @@ router.get('/reviews/:id', Authenticate, async (req, res) => {
     });
     }
     catch (err) {
-        res.status(500).json(err);
+        res.render('404');
     }
 });
 
