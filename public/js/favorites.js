@@ -18,12 +18,11 @@ async function add (event) {
         // reload current game page to show added review
         document.location.reload();
     } else {
-        alert(response.statusText);
+        alert("This is already in your favorites!");
     }
 }
 
 
 button.addEventListener('click', add);
-
 
 

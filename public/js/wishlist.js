@@ -18,11 +18,10 @@ async function add (event) {
         // reload current game page to show added review
         document.location.reload();
     } else {
-        alert(response.statusText);
+        alert("This is already in your wishlist!");
     }
 }
 
 
 button.addEventListener('click', add);
-
 
