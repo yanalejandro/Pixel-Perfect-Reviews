@@ -1,8 +1,8 @@
-<div class="tile is-parent has-background-primary">
-    <button class="add-game button is-danger" type="submit" data-id="{{id}}" data-cover="{{cover}}" data-name="{{name}}"
+<div class="tile is-parent level container is-5">
+    <article class="tile is-child notification level level-item is-primary custom has-text-centered">
+        <p class="title level-item custom">{{name}}</p>
+        <p class="level-item">{{summary}}</p>
+        <button class="add-game level-item button is-danger m-4" type="submit" data-id="{{id}}" data-cover="{{cover}}" data-name="{{name}}"
         data-summary="{{summary}}" data-rating="{{total_rating}}">Add Game</button>
-    <article class="tile is-child notification is-primary">
-        <p class="title">{{name}}</p>
-        <p>{{summary}}</p>
     </article>
 </div>
